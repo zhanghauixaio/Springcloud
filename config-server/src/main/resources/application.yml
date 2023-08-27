@@ -8,9 +8,9 @@ spring:
     config:
       server:
         git:
-          uri: https://gitee.com/zhanghuaixiao/config.git
-          username: zhanghuaixiao
-          password: z4419194566
+          uri: 
+          username: 
+          password: 
   rabbitmq:
     host: localhost
     port: 5672
