@@ -8,6 +8,27 @@ spring:
     config:
       server:
         git:
-          password:
-          username:
-          uri:
+          uri: https://gitee.com/zhanghuaixiao/config.git
+          username: zhanghuaixiao
+          password: z4419194566
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    prefer-ip-address: true
+    instance-id: ${random.uuid}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
+# 发送 /actuator/bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
