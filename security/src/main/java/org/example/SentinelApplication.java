@@ -28,6 +28,7 @@ public class SentinelApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println(username);
     }
+
     @ResponseBody
     @GetMapping("/h")
     public String test() {
