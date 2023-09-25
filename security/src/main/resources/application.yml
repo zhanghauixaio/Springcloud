@@ -1,0 +1,12 @@
+server:
+  port: 8085
+#  ssl:
+#    key-store: classpath:.keystore
+#    key-password: 123456
+#    key-store-type: PKCS12
+filter:
+  name: huaohwi
+
+#shiro:
+#  user:
+#    loginUrl: /login

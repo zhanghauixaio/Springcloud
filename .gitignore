@@ -1,0 +1,4 @@
+/.idea/
+*.iml
+/security/src/main/resources/static/
+/security/src/main/resources/template/
