@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 public class FirstController {
-    @Value("${username}")
-    String username;
+    @Value("${name}")
+    String name;
 
-    @GetMapping
-    public String test() {
-        return username;
+    @Value("${sex}")
+    String sex;
+
+    @GetMapping("/user")
+    public String getUser() {
+        return "姓名：" + name + " 性别：" + sex;
     }
 }

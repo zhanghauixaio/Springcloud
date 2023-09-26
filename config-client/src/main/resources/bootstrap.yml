@@ -6,9 +6,12 @@ spring:
     name: config-client
   cloud:
     config:
+      name: common-model
+      profile: dev
       discovery:
         enabled: true
         service-id: config-server
+      fail-fast: true # 快速失败
 #      retry:
 #        multiplier:  #初始重试间隔时间，默认1000ms
 #        initial-interval:  #下一间隔的乘数，默认1.1，下次间隔时间为1100ms
