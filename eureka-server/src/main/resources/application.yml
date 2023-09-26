@@ -5,7 +5,7 @@ spring:
   application:
     name: eureka-server
   security:
-    basic:
+    basic:  # F版之后，不需要配置
       enable: true
     user:
       name: admin

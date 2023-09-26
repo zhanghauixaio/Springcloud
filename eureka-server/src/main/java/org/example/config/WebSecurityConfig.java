@@ -22,7 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      *    enabled: true
      *
      * 所以应该使用以下方式开启
-     *
+     * spring:
+     *  security:
+     *    enabled: true
      * @param http
      * @throws Exception
      */
@@ -34,14 +36,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //注意：为了可以使用 http://${user}:${password}@${host}:${port}/eureka/ 这种方式登录,所以必须是httpBasic,
         // 如果是form方式,不能使用url格式登录
         http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryUserDetailsManagerConfigurer = auth.inMemoryAuthentication().passwordEncoder(passwordEncoder);
-
-        // inMemoryUserDetailsManagerConfigurer
     }
 }
