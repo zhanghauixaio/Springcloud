@@ -9,6 +9,11 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
+#      retry:
+#        multiplier:  #初始重试间隔时间，默认1000ms
+#        initial-interval:  #下一间隔的乘数，默认1.1，下次间隔时间为1100ms
+#        max-attempts:  #最大重试次数，默认6次
+#        max-interval:  #最大间隔时间，默认2000ms
 
 eureka:
   instance:
