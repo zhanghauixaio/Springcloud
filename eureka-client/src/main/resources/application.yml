@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: eureka-client
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
 
 eureka:
   instance:
@@ -13,14 +17,21 @@ eureka:
     instance-id: ${random.uuid}:${spring.application.name}:${server.port}
   client:
     service-url:
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: http://admin:admin@localhost:8080/eureka/
 
 #hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 10000
 #
 #ribbon:
 #  ConnectTimeOut: 500
 #  ReadTimeOut: 4000
 
+# 负载均衡
 eureka-provider:
   ribbon:
     ConnectTimeOut: 500
