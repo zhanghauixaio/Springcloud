@@ -39,3 +39,9 @@ eureka-provider:
     OkToRetryOnAllOptions: true
     MaxAutoRetriesNextServer: 2 # 最大重试次数，之后跳到下一个服务提供者
     MaxAutoRetries: 1 # 首次重试次数
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
