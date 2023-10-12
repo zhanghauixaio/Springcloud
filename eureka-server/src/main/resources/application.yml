@@ -13,8 +13,13 @@ spring:
 
 eureka:
   instance:
+    # hostname反应鼠标放在instance-id上左下角显示的xxxx:xx/info中xxxx
+    # 1》hostname没有赋值且prefer-ip-address为false时，显示电脑名，
+    #   而当prefer-ip-address为true时，显示本地连接地址ip(为ipconfig中以太网适配器的ip，优先显示本地连接的ip，没有本地连接才显示以太网适配器虚拟机的ip)
+    # 2》hostname赋值后，当perfer-ip-address为false时，显示hostname，否则，显示本地连接地址ip
+    # 3》当hostname有值和prefer-ip-address为true时，prefer-ip-address优先级高，即xxxx显示ip
     hostname: localhost
-    prefer-ip-address: true
+    prefer-ip-address: true # 当为true时，直观感受是xxxx显示的为ip
     instance-id: ${random.uuid}:${spring.application.name}:${server.port}
   client:
     register-with-eureka: false
