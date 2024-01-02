@@ -1,0 +1,12 @@
+
+spring:
+  config:
+    name: rabbitmq-provider
+  rabbitmq:
+    host: 192.168.31.129
+    port: 5672
+    username: admin
+    password: admin
+
+server:
+  port: 8084
