@@ -20,7 +20,9 @@
         <module>sentinel</module>
         <module>config-client</module>
         <module>HystrixDashboard</module>
-        <module>message</module>
+        <module>rabbitmq</module>
+        <module>rabbitmq/rabbitmq-provider</module>
+        <module>rabbitmq/rabbitmq-client</module>
     </modules>
     <packaging>pom</packaging>
 
