@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: message-websocket
+
+server:
+  port: 9090

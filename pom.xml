@@ -20,6 +20,7 @@
         <module>sentinel</module>
         <module>config-client</module>
         <module>HystrixDashboard</module>
+        <module>message</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: kafka-provider
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.31.129:9092
+          configuration:
+            max.request.size: 104857600
+            max.connections: 1000000000
+            max.idle.ms: 1000000000
+            max.block.ms: 1000000000
+  kafka:
+    bootstrap-servers: 192.168.31.129:9092
