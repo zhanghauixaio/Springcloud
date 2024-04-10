@@ -1,5 +1,6 @@
 package org.example;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,8 @@ public class CCApplication {
         SpringApplication.run(CCApplication.class, args);
     }
 
-    @GetMapping()
+    @GetMapping("test")
+    @ApiOperation("test")
     public String get(){
         return "h";
     }
