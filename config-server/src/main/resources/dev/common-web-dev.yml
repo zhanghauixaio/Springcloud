@@ -1,0 +1,88 @@
+spring:
+  aop:
+    auto: true
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+      uri-encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+      location: /app/zetacloud/appdata/tmp
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  zipkin:
+    sender:
+      type: web
+    baseUrl: http://192.168.0.203:9411
+    locator:
+      discovery:
+        enabled: false
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+# Use different context-path to avoid session cookie overlapping
+server:
+  servlet:
+    context-path: /
+
+  use-forward-headers: false
+  max-http-header-size: 1024000
+  tomcat:
+    maxThreads: 200 # tomcat可并发处理的请求数
+    #acceptCount: 200
+
+# Define the Eureka server that handles service registration
+eureka:
+  client:
+    healthcheck:
+      enabled: true # 开启健康检查（依赖spring-boot-starter-actuator）
+
+# 服务监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+# 超时相关设置
+session:
+  timeout: -1  # 单位秒,设置为负数代表session只有关闭浏览器才会过期
+
+hystrix:
+  shareSecurityContext: true # 使SecurityContext能够传递到hystrix线程
+  command:
+    default: # 缺省配置，适用于所有服务（如果不是default，而是具体的服务名，则是该服务的单独配置）
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 65000  # 单位毫秒，建议比ribbon.ReadTimeout多5秒
+  threadpool:
+    default:
+      coreSize: 10 # 线程池中线程数，默认10
+      maximumSize: 200 # 线程池中最大线程数
+      allowMaximumSizeToDivergeFromCoreSize: true # 是否允许线程池动态调整大小
+      keepAliveTimeMinutes: 1 # 空闲线程存活时间
+      maxQueueSize: -1 # If you set this to -1 then SynchronousQueue will be used, otherwise a positive value will be used with LinkedBlockingQueue.
+ribbon:
+  ReadTimeout: 60000  # 单位毫秒
+  ConnectTimeout: 5000
+  MaxAutoRetries: 0 # 对当前服务实例的重试次数
+  MaxAutoRetriesNextServer: 0 # 切换服务实例的重试次数
+  eureka:
+    enabled: true # 是否基于eureka提供的服务列表（ribbon也可以自己配置服务列表）
+  ServerListRefreshInterval: 1000 # 刷新服务列表的周期(默认30*1000ms)
+
+# 日志相关配置
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.security: INFO
+    cn.com.zetatech.cloud.sf.service.common.mvc.filter.PrincipalFilter: DEBUG

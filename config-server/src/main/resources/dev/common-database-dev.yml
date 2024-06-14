@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.10.102.80:5432/dmo_osat_v1
+    username: postgres
+    password: postgres
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      #connection-test-query: select 1 from dual
+      connection-test-query: select 1
+
+mybatis-plus:
+  configuration:
+    callSettersOnNulls: true
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+  type-handlers-package: cn.com.zetatech.cloud.sf.service.enhance.mybatis.plus
+
+zetacloud:
+  scheduler:  # zetacloud平台定时器数据源属性配置
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://10.10.102.78:5432/zetatech_quartz_dev
+      username: postgres
+      password: postgres
+  transaction:
+    asInitiator: false # 作为分布式事务的发起者
+    asParticipant: false # 作为分布式事务的参与者
+  sharding:
+    tenants:
+      - tenantAndSite: SENSPIL-SHANDONG
+        dataSource:
+          jdbcUrl: jdbc:postgresql://10.10.102.80:5432/dmo_osat_v1_dev
+          username: postgres
+          password: postgres
+      - tenantAndSite: HSL-SHANDONG
+        dataSource:
+          jdbcUrl: jdbc:postgresql://10.10.102.80:5432/dmo_osat_v1_myb
+          username: postgres
+          password: postgres

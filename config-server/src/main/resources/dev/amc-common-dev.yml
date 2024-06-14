@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        amc_agent_alarm_output_channel:
+          destination: AMC_ALARM_CREATION
+        amc_alarm_creation_consumer_binding:
+          group: AMC_ALARM_CREATION_CONSUMER_GROUP
+          destination: AMC_ALARM_CREATION

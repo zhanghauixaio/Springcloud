@@ -1,0 +1,16 @@
+# Define the request route for each application
+zuul:
+  # ignored-services: '*'
+  routes:
+    log-service: /log/**
+  host:
+    maxTotalConnections: 4000         # 网关的最大并发连接数，默认是200
+    maxPerRouteConnections: 1000       # 网关下每个路由的最大并发连接数，默认值是20
+  ribbon-isolation-strategy: SEMAPHORE
+
+oauth2:
+  client:
+    # 不需要登录访问的url
+    notLoginUrl: /lcp/**/*.js, /lcp/**/*.html, /lcp/devops/**, /uaa/**, /login, /turbine/**, /actuator/**, /security/forgetPasswords/**, /security/download/file,/security/accountMgts/*/*/pwdExpired/sendMail, /security/system/getCopyright, /security/tenants/license, /security/tenants/license/preview, /security/system/getEnv, /amc-http-agent-service/alarms/**
+    # 不需要刷新session存活时间的url
+    notRefreshSession: /security/forgetPasswords/**, /security/download/file,/security/accountMgts/*/*/pwdExpired/sendMail, /security/system/getCopyright, /security/tenants/license, /security/tenants/license/preview, /security/system/getEnv, /security/accountMgts/**/heartbeat

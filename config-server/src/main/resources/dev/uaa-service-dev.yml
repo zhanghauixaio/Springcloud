@@ -1,0 +1,9 @@
+# Use different context-path to avoid session cookie overlapping
+server:
+  servlet:
+    context-path: /uaa
+
+# 日志相关配置
+logging:
+  level:
+    io.lettuce.core.protocol.ConnectionWatchdog: DEBUG

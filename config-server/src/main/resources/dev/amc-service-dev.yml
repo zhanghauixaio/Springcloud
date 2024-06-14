@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.10.102.78:1521:orcl
+    username: amc
+    password: amc
+    type: com.zaxxer.hikari.HikariDataSource
+
+    #   platform: mysql
+    #   driver-class-name: com.mysql.cj.jdbc.Driver
+    #   url: jdbc:mysql://10.10.102.78:3306/sf_dev
+    #   username: root
+    #   password: root
+
+    #    platform: oracle
+    #    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #    url: jdbc:oracle:thin:@10.10.102.80:1521:helowin
+    #    username: sf_v3_dev
+    #    password: sf_v3_dev
+
+    hikari:
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      connection-test-query: select 1 from dual # oracle使用此语句
+      #connection-test-query: select 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  health:
+    db:
+      enabled: false
+
+endpoints:
+  health:
+    enabled: true
+    sensitive: false
+
+custom:
+  rest:
+    connection:
+      connection-request-timeout: 3000
+      connect-timeout: 3000
+      read-timeout: 3000

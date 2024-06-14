@@ -1,0 +1,48 @@
+# 本配置模块为平台最基础配置
+
+# 自定义zetatech模块相关配置
+zetacloud:
+  server:             # 平台服务器地址相关配置
+    svn:              # svn模块
+      default:
+        ip: 192.168.0.250
+      # 下面是关于平台各中间件组件默认配置（kafka，zookeeper，redis等）
+      # 应用名: 需要配置应用自定义配置，默认使用default模块
+    kafka:           # 总线组件(平台总线为kafka)
+      default:
+        brokers: devinfra1:9092
+    zookeeper:       # zookeeper组件
+      default:
+        nodes: devinfra1:2181
+    redis:           # redis组件（单节点模式）
+      default:
+        ip: devinfra1
+        port: 6380
+    sentinel:        # redis sentinel组件（5.0以前的集群模式）
+      default:
+        master: mymaster
+        nodes: 10.10.102.78:26379,10.10.102.80:26379,10.10.102.82:26379
+    redis-cluster:   # redis cluster组件（5.0以后的集群模式）
+      default:
+        nodes: 10.10.102.83:6380,10.10.102.84:6380,10.10.102.85:6380,10.10.102.83:6381,10.10.102.84:6381,10.10.102.85:6381
+  mail: # 邮件
+    transportProtocol: smtp
+    stmpHost: smtp.exmail.qq.com
+    stmpPort: 465
+    sendAccount: bin.gan@zetatech.com.cn
+    sendPassword: 871637188coM
+    sendAddress: bin.gan@zetatech.com.cn
+    ssl: true
+    connectionTimeout: 5000
+    timeout: 5000
+    writeTimeout: 5000
+  sms: # 短信
+    accesskeyId:
+    accesskeySecret:
+  wx: # 微信
+    corpid: ww5d910727e0ff7cb1 # 企业号
+    applications:
+      - name: 统一告警平台
+        code: SF_MGT
+        appId: 1000004 # 测试应用
+        secret: QtzMV57pqncqyxICJOnppm1VHJ2PwIx6krMRIyKQpmY

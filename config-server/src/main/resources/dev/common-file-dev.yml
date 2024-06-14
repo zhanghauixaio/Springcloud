@@ -1,0 +1,6 @@
+multipart:
+  maxFileSize: 100000000
+  maxRequestSize: 1024000000
+  location: /var/zetatech/nfs/file-service/tmp
+fileSys:
+  uploadLocation: /var/zetatech/nfs/file-service

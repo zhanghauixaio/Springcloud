@@ -1,0 +1,70 @@
+# 数据库相关配置
+spring:
+  datasource:
+#    platform: dm
+#    driver-class-name: dm.jdbc.driver.DmDriver
+#    url: jdbc:dm://10.10.102.97:5236/DMSERVER
+#    username: zeta01
+#    password: zeta_2022
+
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.10.102.129:5432/sf_security
+    username: postgres
+    password: postgres
+
+ #   platform: mysql
+ #   driver-class-name: com.mysql.cj.jdbc.Driver
+ #   url: jdbc:mysql://10.10.102.78:3306/sf_dev
+ #   username: root
+ #   password: root
+
+#    platform: oracle
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@10.10.102.80:1521:helowin
+#    username: sf_v3_dev
+#    password: sf_v3_dev
+
+#    platform: sqlserver
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://10.10.104.113:1433;Database=SF_DEV;trustServerCertificate=true
+#    username: SA
+#    password: admin123
+
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+ #     connection-test-query: select 1 from dual # oracle使用此语句
+      connection-test-query: select 1
+  zookeeper:
+    zkNodes: ${zetacloud.server.zookeeper.default.nodes} # zookeeper 地址
+    retryCount: 1 # 重试次数
+    elapsedTimeMs: 2000 # 重试间隔时间
+    sessionTimeoutMs: 60000 # session超时时间
+    connectionTimeoutMs: 10000 # 连接超时时间
+  ldap:
+    urls: ldap://localhost:389
+    username: cn=<ldapuser>,${spring.ldap.base}
+    password: <ldap_password>
+    base: dc=ptn,dc=gwkf,dc=cn
+    people-ous: #ou=FBA1,ou=FAB
+    allow-sf-login: true
+
+pagehelper:
+  helper-dialect: postgresql
+  #helper-dialect: sqlserver
+#  helper-dialect: mysql
+#  helper-dialect: oracle
+  reasonable: true
+  support-methods-arguments: true
+  params: countSql
+
+file:
+  download:
+    url: http://192.168.0.201/gw/security/service/download/file # 应用手机APP下载入口
+
+management:
+  health:
+    ldap:
+      enabled: false

@@ -1,0 +1,29 @@
+# saas总线bus服务器配置
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ${zetacloud.server.kafka.default.brokers}
+          zk-nodes: ${zetacloud.server.zookeeper.default.nodes}
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+  kafka:
+    bootstrap‐servers: ${zetacloud.server.kafka.default.brokers}
+    listener:
+      concurrency: 1
+      ack‐mode: MANUAL
+      poll-timeout: 1000
+    consumer:
+      fetch-max-wait: 500
+      fetch-min-size: 1
+      enable‐auto‐commit: false
+      session-timeout: 10000
+      heartbeat-interval: 3000
+      max-poll-records: 10   # default 500
+      auto‐offset‐reset: latest
+      key‐deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value‐deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        max.poll.interval.ms: 30000

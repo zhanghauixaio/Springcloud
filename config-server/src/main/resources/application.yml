@@ -7,10 +7,13 @@ spring:
   cloud:
     config:
       server:
+#        native:
+#          search-locations: file:${zetacloud_home}/nfs/config/dev,file:${zetacloud_home}/nfs/config/demo,file:${zetacloud_home}/nfs/config/test,file:${zetacloud_home}/nfs/config/prod # 本地
         git:
           uri:
           username:
           password:
+      enabled: true
   rabbitmq:
     host: 192.168.31.129
     port: 5672
@@ -22,6 +25,7 @@ eureka:
     lease-expiration-duration-in-seconds: 10
     prefer-ip-address: true
     instance-id: ${random.uuid}:${spring.application.name}:${server.port}
+    hostname: ${spring.cloud.client.ip-address}
   client:
     service-url:
       defaultZone: http://admin:admin@localhost:8080/eureka/
